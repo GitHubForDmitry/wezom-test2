@@ -1,11 +1,26 @@
 import './style.scss';
-import React from 'react';
-import { Button, Col, Row } from 'antd';
+import React, {useState} from 'react';
+import { Button, Col, Row, Modal } from 'antd';
 import { LoginOutlined } from '@ant-design/icons';
 import { Logo } from '../logo';
 import { NavBar } from '../navbar';
+import { LoginForm } from "../login";
 
 const View = () => {
+
+	const [isModalVisible, setIsModalVisible] = useState(false);
+	const showModal = () => {
+		setIsModalVisible(true);
+	};
+
+	const handleOk = () => {
+		setIsModalVisible(false);
+	};
+
+	const handleCancel = () => {
+		setIsModalVisible(false);
+	};
+
 	return (
 		<div className={'header'}>
 			<Row type={'flex'} gutter={36} align={'middle'}>
@@ -22,9 +37,18 @@ const View = () => {
 								type={'link'}
 								htmlType={'button'}
 								icon={<LoginOutlined />}
+								onClick={showModal}
 							>
 								Sign In
 							</Button>
+							<Modal
+								title="Basic Modal"
+								visible={isModalVisible}
+								onOk={handleOk}
+								onCancel={handleCancel}
+							>
+								<LoginForm />
+							</Modal>
 						</Col>
 					</Row>
 				</Col>
