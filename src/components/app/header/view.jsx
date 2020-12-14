@@ -42,7 +42,7 @@ const View = () => {
 								Sign In
 							</Button>
 							<Modal
-								title="Basic Modal"
+								title="Sign in"
 								visible={isModalVisible}
 								onOk={handleOk}
 								onCancel={handleCancel}

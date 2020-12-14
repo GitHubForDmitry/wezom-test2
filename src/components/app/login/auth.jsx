@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { memo } from 'react';
+import ReduxForm from "./reduxForm";
 
-const Auth = React.memo(() => {
+const Auth = memo(() => {
+
+	const submit = (values) => {
+		window.alert(JSON.stringify(values))
+	};
+
 	return (
-		<h1>Login form</h1>
+		<div>
+			<ReduxForm onSubmit={submit} />
+		</div>
 	);
 });
 
