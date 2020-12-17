@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { reduxForm } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import { Form, Input, Button } from 'antd';
-import { UserOutlined, LockOutlined, EyeInvisibleOutlined, EyeTwoTone, CloseOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, CloseOutlined } from '@ant-design/icons';
 
-class ReduxForm extends Component {
+class View extends Component {
 
 	onFinish = (values) => {
 		console.log('Received values of form: ', values);
@@ -16,33 +16,20 @@ class ReduxForm extends Component {
 	render() {
 		return (
 			<Form
-				name="normal_login"
 				className="login-form"
-				onFinish={this.onFinish}
+				onFinish={this.props.handleSubmit(this.onFinish)}
 				onFinishFailed={this.onFinishFailed}
 			>
-				<Form.Item
-					name="username"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your Username!',
-						},
-					]}
-				>
-					<Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+				<Form.Item>
+					<Field
+						name="username"
+						component={(params) => {
+							const { input } = params;
+							return <Input {...input} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+						}}
+					/>
 				</Form.Item>
-				<Form.Item
-					name="password"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your Password!',
-						},
-					]}
-					iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-
-				>
+				<Form.Item>
 					<Input
 						prefix={<LockOutlined className="site-form-item-icon" />}
 						type="password"
@@ -62,8 +49,8 @@ class ReduxForm extends Component {
 	}
 }
 
-ReduxForm = reduxForm({
+const LoginForm = reduxForm({
 	form: 'login'
-}) (ReduxForm);
+}) (View);
 
-export default ReduxForm;
+export { LoginForm };
