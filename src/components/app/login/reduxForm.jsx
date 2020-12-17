@@ -40,7 +40,10 @@ class View extends Component {
 					<Button type="primary" htmlType="submit" className="login-form-button">
 						Sign in
 					</Button>
-					<Button icon={<CloseOutlined />} className="cancel-form-button" danger>
+					<Button icon={<CloseOutlined />}
+							className="cancel-form-button"
+							danger
+					>
 						Cancel
 					</Button>
 				</Form.Item>
